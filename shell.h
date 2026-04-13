@@ -8,7 +8,9 @@
 #include <pthread.h>
 #include <ctype.h>
 #include <sys/wait.h>
-#include <unistd.h>
+#include <unistd.h> 
+#include <pwd.h>
+
 
 void parse(char *buf, char **args);
 

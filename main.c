@@ -8,19 +8,22 @@ int main () {
   char *args[64];/* com um maximo de 64 argumentos */
 
   strcpy (prompt, "SOSHELL: Introduza um comando : prompt>");
-  while (1)
-  {
+  while (1) {
     printf ("%s", prompt);
-    if (fgets (linha, 1023, stdin) == NULL)
-    {
+
+    if (fgets (linha, 1023, stdin) == NULL) {
       printf ("\n");
       exit (0);
     }
+
     len = strlen (linha);
+    
     if (1 == len)
       continue;/* linha é apenas \n */
+    
     if (linha[len - 1] == '\n')
       linha[len - 1] = '\0';
+  
     parse (linha, args);/* particiona a string em argumentos */
 
     if (!builtin (args))
@@ -65,6 +68,16 @@ int builtin (char **args)
     return 1; // funcionalidade embutida
   }
 
+  if(0==strcmp(args[0], "quemsoueu")) {
+    uid_t uid = getuid();                 // GetUser ID as int
+    struct passwd *pw = getpwuid(uid);    // get user info
+    
+    if (pw) 
+      printf("Sou utilizador: %s\n", pw->pw_name);
+    else perror("quemsoueu erro");
+
+    return 1; // funcionalidade embutida
+  }
 
 
   /* IMPORTANTE : 

@@ -1,0 +1,10 @@
+# Compiled objects
+*.o
+
+# Executables
+soshell
+a.out
+
+# Editor / OS junk
+*.swp
+.DS_Store

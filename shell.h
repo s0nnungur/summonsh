@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <unistd.h> 
 #include <pwd.h>
+#include <grp.h>
 
 
 void parse(char *buf, char **args);

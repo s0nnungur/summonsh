@@ -69,14 +69,34 @@ int builtin (char **args)
   }
 
   if(0==strcmp(args[0], "quemsoueu")) {
-    uid_t uid = getuid();                 // GetUser ID as int
+
+    int n = getgroups(0,NULL);            // verifica qnts grupos existem
+    gid_t lista[n]                        // define array para os ids dos grupos
+    getgroups(n,lista);                   // preenche array com ids
+
+    uid_t uid = getuid();                 // GetUser ID como int
     struct passwd *pw = getpwuid(uid);    // get user info
+    // gid_t gid = getgid();                 // GetGroup ID as int
+    // struct group *gr = getgrgid(gid);       // get group info
     
     if (pw) 
-      printf("Sou utilizador: %s\n", pw->pw_name);
+      printf("uid=%d(%s)\n", uid, pw->pw_name);
     else perror("quemsoueu erro");
 
-    return 1; // funcionalidade embutida
+    //if (gr)
+    //  printf("gid=%d(%s) ", gid, gr->gr_name);
+    
+    printf ("groups=");
+    for (int i=0;i<n;i++) {
+      struct group *g = getgrgid(lista[i]);
+      if (i>0) printf(",");
+      if g
+        printf("")
+      
+    }
+    
+    
+      return 1; // funcionalidade embutida
   }
 
 

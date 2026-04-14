@@ -3,9 +3,9 @@
 */
 #include "shell.h"
 
-void execute (char **args)
-{
+void execute (int numargs, char **args) {
   int pid, status;
+  int code = ultimo(&numargs, args);
 
   if ((pid = fork ()) < 0)
     { /* cria um processo progenito */
@@ -25,8 +25,17 @@ void execute (char **args)
     }                    /* vector de strings que contem os
                             * argumentos. O ultimo argument */
 
-  while (wait (&status) != pid)
-    /*spin fazer nada */ ;
+  if (code == FG)            
+    while (wait (&status) != pid)
 
   return;
+}
+
+int ultimo (int *numargs, char **args) {
+  if (args[*numargs-1][0]=='&') {
+    *numargs=*numargs-1;
+    args[*numargs]=NULL;
+    return BG;
+  }
+  return FG;                  /* return FG (foreground) or BG (background) defined in shell.h */
 }

@@ -13,11 +13,17 @@
 #include <grp.h>
 
 
-void parse(char *buf, char **args);
+int parse(char *buf, char **args);
 
-void execute(char **args);
+void execute(int numargs, char **args);
 
 int builtin (char **args);
+
+void socp(char *fonte, char *destino);
+
+void ioCopy(int IN, int OUT);
+
+int ultimo(int *numargs, char **args);
 
 /* constantes que podem tornar uteis*/
 

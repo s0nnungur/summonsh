@@ -61,7 +61,7 @@ int builtin (char **args) {
     return 1;                                             /* built-in functionality */
   }
 
-  if (strlen(args[0])>4 && 0==strncmp(args[0], "PS1=", 4) ) {
+  if (strlen(args[0])>4 && strncmp(args[0], "PS1=", 4) == 0) {
     
     char *pos = strstr(args[0]+4, "\\h");
 
@@ -150,15 +150,31 @@ int builtin (char **args) {
     return 1;                   
   }
 
-  if(0 == strcmp(args[0], "epsilon")) {
+
+  // p5 - teste pratico
+
+  if(strcmp(args[0], "epsilon")==0) {
       printf("Biblioteca %10e %10e\n",FLT_EPSILON, DBL_EPSILON);
       float eps = 1.0f; 
       while ((1.0f + eps / 2.0f) != 1.0f) eps /= 2.0f;
       printf("calculado: %10e\n",eps);
 
-    return 1; //funcao embutida
+    return 1;                           //built in function
   }
 
+  if(strcmp(args[0], "calc")==0 && args[1]!= NULL && args[2] != NULL && args[3] != NULL) {
+    //chamar funcao calc
+    calc(args[1],args[2],args[3]);
+
+    return 1;                            // built-in function
+  }
+
+  if(strcmp(args[0], "bits")==0 && args[1]!= NULL && args[2] != NULL && args[3] != NULL) {
+    //chama funcao bits
+    bits(args[1],args[2],args[3]);
+
+    return 1;                            // built-in function
+  }
   /* IMPORTANT: 
    Return 0 to indicate that there's no built in functionality and that 
    it will be executed through exec() within the funciton execute.c

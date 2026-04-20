@@ -12,6 +12,8 @@
 #include <pwd.h>
 #include <grp.h>
 #include <float.h>
+#include <math.h>
+
 
 
 int parse(char *buf, char **args);
@@ -25,6 +27,10 @@ void socp(char *fonte, char *destino);
 void ioCopy(int IN, int OUT);
 
 int ultimo(int *numargs, char **args);
+
+void calc(char *value1, char *op, char *value2);
+
+void bits(char *op1, char *op, char *op2);
 
 /* constantes que podem tornar uteis*/
 

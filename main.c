@@ -150,6 +150,15 @@ int builtin (char **args) {
     return 1;                   
   }
 
+  if(0 == strcmp(args[0], "epsilon")) {
+      printf("Biblioteca %10e %10e\n",FLT_EPSILON, DBL_EPSILON);
+      float eps = 1.0f; 
+      while ((1.0f + eps / 2.0f) != 1.0f) eps /= 2.0f;
+      printf("calculado: %10e\n",eps);
+
+    return 1; //funcao embutida
+  }
+
   /* IMPORTANT: 
    Return 0 to indicate that there's no built in functionality and that 
    it will be executed through exec() within the funciton execute.c

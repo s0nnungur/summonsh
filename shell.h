@@ -11,6 +11,7 @@
 #include <unistd.h> 
 #include <pwd.h>
 #include <grp.h>
+#include <float.h>
 
 
 int parse(char *buf, char **args);

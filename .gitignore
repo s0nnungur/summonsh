@@ -5,7 +5,8 @@
 soshell
 a.out
 
-# Editor / OS junk
+# Editor / OS junk / text / doc
 *.swp
 .DS_Store
-sommeCommands.txt
+*.txt
+*.pdf

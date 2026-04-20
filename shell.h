@@ -32,6 +32,8 @@ void calc(char *value1, char *op, char *value2);
 
 void bits(char *op1, char *op, char *op2);
 
+int isjpeg (int fileDescriptor);
+
 /* constantes que podem tornar uteis*/
 
 #define BG 0

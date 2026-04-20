@@ -175,6 +175,35 @@ int builtin (char **args) {
 
     return 1;                            // built-in function
   }
+
+  if(strcmp(args[0], "isjpeg") == 0 && args[1] != NULL) {
+    int fd = open(args[1], O_RDONLY);
+    if (fd<0) {
+      perror(args[1]);
+      return 1;
+    } 
+    if (isjpeg(fd))
+        printf("%s é JPEG!\n", args[1]);
+    else
+        printf("%s não é JPEG!\n", args[1]);
+    close(fd);
+    return 1;
+    }
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
   /* IMPORTANT: 
    Return 0 to indicate that there's no built in functionality and that 
    it will be executed through exec() within the funciton execute.c

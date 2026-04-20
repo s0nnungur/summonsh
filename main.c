@@ -44,7 +44,8 @@ int main () {
 
 
 int builtin (char **args) {
-                                                          /* every built in function must return 1*/
+                       
+  //exit /* every built in function must return 1*/
   if (strcmp (args[0], "sair") == 0) {
     exit (0);
     return 1;                                             /* built-in functionality */

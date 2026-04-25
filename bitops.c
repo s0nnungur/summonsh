@@ -6,11 +6,33 @@
 /*  ██████╔╝╚██████╔╝██║░╚═╝░██║██║░╚═╝░██║╚█████╔╝██║░╚███║██████╔╝██║░░██║ */
 /*  ╚═════╝░░╚═════╝░╚═╝░░░░░╚═╝╚═╝░░░░░╚═╝░╚════╝░╚═╝░░╚══╝╚═════╝░╚═╝░░╚═╝ */ 
 /* ========================================================================= */
-/* Author : s0nnungur  (José Miguel Santos                                   */
+/* Author : s0nnungur  (José Miguel Santos)                                  */
 /* Date   : 2026                                                             */
 /* Desc   : Unix shell written in C                                          */
 /* ========================================================================= */
 
 #include "shell.h"
 
-void printBitsLn()
+typedef unsigned short type;
+type mask = 0x8000; //1000 0000 0000 0000
+
+/*
+void printBitsLn(type numero, type mascara) {
+    printBits (numero,mascara);
+    putchar('\t');
+*/
+
+void printRow(const char *expr, type num, type mask) {
+    printf("%s\t", expr);
+
+    printBits(num,mask);
+
+    printf("\t%hu\t%ho\t%hx\n",num,num,num);
+}
+
+void printBits (type num, type mask) {
+    while (mask > 0) {
+        putchar((num & mask) ? '1' : '0');
+        mask >>= 1;
+    }
+}

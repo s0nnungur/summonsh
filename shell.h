@@ -6,7 +6,7 @@
 /*  ██████╔╝╚██████╔╝██║░╚═╝░██║██║░╚═╝░██║╚█████╔╝██║░╚███║██████╔╝██║░░██║ */
 /*  ╚═════╝░░╚═════╝░╚═╝░░░░░╚═╝╚═╝░░░░░╚═╝░╚════╝░╚═╝░░╚══╝╚═════╝░╚═╝░░╚═╝ */ 
 /* ========================================================================= */
-/* Author : s0nnungur  (José Miguel Santos                                   */
+/* Author : s0nnungur  (José Miguel Santos)                                  */
 /* Date   : 2026                                                             */
 /* Desc   : Unix shell written in C                                          */
 /* ========================================================================= */
@@ -31,7 +31,7 @@
 #include <math.h>
 #include <errno.h>
 
-typedef unsigned short tipo;
+typedef unsigned short type;
 
 
 int parse(char *buf, char **args); 
@@ -90,13 +90,19 @@ and also the current max number of open files the current process can have,
 the file descriptors that are open and the total number of opened file descriptors.
 */
 
-void printBitsLn(tipo numero, tipo mascara);
-/**/
-void printBits(tipo numero, tipo mascara);
-/**/
+//void printBitsLn(type num, type mask);
+/* prints the bits of a number in a new line */
+
+void printBits(type num, type mask);
+/* prints the bits of a number */
+
+void printRow(const char *expr, type num, type mask);
+/* prints a row of the bit table */
 
 
-/* constantes que podem tornar uteis*/
+
+
+/* useful constants*/
 
 #define BG 0
 #define FG 1

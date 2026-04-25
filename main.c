@@ -6,7 +6,7 @@
 /*  ██████╔╝╚██████╔╝██║░╚═╝░██║██║░╚═╝░██║╚█████╔╝██║░╚███║██████╔╝██║░░██║ */
 /*  ╚═════╝░░╚═════╝░╚═╝░░░░░╚═╝╚═╝░░░░░╚═╝░╚════╝░╚═╝░░╚══╝╚═════╝░╚═╝░░╚═╝ */ 
 /* ========================================================================= */
-/* Author : s0nnungur  (José Miguel Santos                                   */
+/* Author : s0nnungur  (José Miguel Santos)                                  */
 /* Date   : 2026                                                             */
 /* Desc   : Unix shell written in C                                          */
 /* ========================================================================= */
@@ -255,12 +255,28 @@ int builtin (char **args) {
     return 1;               // built-in function
   }
 
+  if(strcmp(args[0], "displayBitOps") == 0) {
 
+    type um=atoi(args[1]), dois=atoi(args[2]), mask=0x8000; //1000 0000 0000 0000
 
+    // check if arguments are valid
+    if(args[1]==NULL || args[2]==NULL)   
+      printf("ERROR! Incorrect syntaxe. Usage: displayBitOps <num1> <num2>\n");
+    else if (um > 65535 || um < 0 || dois > 65535 || dois < 0)
+      printf("ERROR! Numbers must be between 0 and 65535 (inclusive)\n");
+    else {  
+      printf("\nExpression\t\tbin\t\t\tdec\toct\thex\n");
 
+      printRow("um\t\t",          um,          mask);
+      printRow("dois\t\t",        dois,        mask);
+      printRow("um & dois\t",   um & dois,   mask);
+      printRow("um | dois\t",   um | dois,   mask);
+      printRow("um ^ dois\t",   um ^ dois,   mask);
+      printRow("um & ~dois\t",  um & ~dois,  mask);
 
-
-
+      return 1;              // built-in function 
+    }
+  }
 
 
 

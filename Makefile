@@ -6,7 +6,7 @@
 #/*  ██████╔╝╚██████╔╝██║░╚═╝░██║██║░╚═╝░██║╚█████╔╝██║░╚███║██████╔╝██║░░██║ */
 #/*  ╚═════╝░░╚═════╝░╚═╝░░░░░╚═╝╚═╝░░░░░╚═╝░╚════╝░╚═╝░░╚══╝╚═════╝░╚═╝░░╚═╝ */ 
 #/* ========================================================================= */
-#/* Author : s0nnungur  (José Miguel Santos                                   */
+#/* Author : s0nnungur  (José Miguel Santos)                                  */
 #/* Date   : 2026                                                             */
 #/* Desc   : Unix shell written in C                                          */
 #/* ========================================================================= */
@@ -24,7 +24,7 @@
 CC=cc
 FLAGS=-c -Wall
 LIBS=-lm
-OBS=main.o execute.o parse.o socp.o calc.o files.o
+OBS=main.o execute.o parse.o socp.o calc.o files.o bitops.o
 
 #Alvo por defeito é o primeiro
 all :  soshell
@@ -41,6 +41,8 @@ calc.o : shell.h calc.c
 	$(CC) $(FLAGS) calc.c
 files.o : shell.h files.c
 	$(CC) $(FLAGS) files.c
+bitops.o : shell.h bitops.c 
+	$(CC) $(FLAGS) bitops.c
 soshell : $(OBS)
 	$(CC)  -o soshell  $(OBS) $(LIBS)
 clean limpar:

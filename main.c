@@ -92,7 +92,7 @@ int builtin (char **args) {
     
     if (pw) 
       printf("uid=%d(%s)\n", uid, pw->pw_name);
-    else perror("quemsoueu erro");
+    else perror("ERROR! quemsoueu ");
 
     if (gr)
       printf("gid=%d(%s) ", gid, gr->gr_name);
@@ -146,7 +146,7 @@ int builtin (char **args) {
     if (args[1] != NULL && args[2] != NULL)
       socp(args[1], args[2]);
     else 
-      printf("Incorrect syntax. Usage: socp source destination\n");
+      printf("Incorrect syntax: Usage: socp source destination\n");
 
     return 1;                   
   }
@@ -155,10 +155,10 @@ int builtin (char **args) {
   // p5 - teste pratico
 
   if(strcmp(args[0], "epsilon")==0) {
-      printf("Biblioteca %10e %10e\n",FLT_EPSILON, DBL_EPSILON);
+      printf("Library %10e %10e\n",FLT_EPSILON, DBL_EPSILON);
       float eps = 1.0f; 
       while ((1.0f + eps / 2.0f) != 1.0f) eps /= 2.0f;
-      printf("calculado: %10e\n",eps);
+      printf("calculated: %10e\n",eps);
 
     return 1;                           //built in function
   }
@@ -184,9 +184,9 @@ int builtin (char **args) {
       return 1;
     } 
     if (isjpeg(fd))
-        printf("%s é JPEG!\n", args[1]);
+        printf("%s is JPEG!\n", args[1]);
     else
-        printf("%s não é JPEG!\n", args[1]);
+        printf("%s isn't JPEG!\n", args[1]);
     close(fd);
     return 1;                   // built-in function
     }
@@ -198,13 +198,49 @@ int builtin (char **args) {
       return 1;
     }
     if (isgif(fd))
-        printf("%s é GIF!\n", args[1]);
+        printf("%s is a GIF!\n", args[1]);
     else
-        printf("%s não é GIF!\n", args[1]);
+        printf("%s isn't a GIF!\n", args[1]);
     close(fd);
     return 1;               // built-in function
   }  
 
+  if(strcmp(args[0], "isValid")==0) {
+    if (NULL!=args[1]) {
+      int fd=atoi(args[1]);
+      printf("%s is %s valid\n", fd, fd_is_valid(fd)? "": "nope");
+    }
+    return 1;               // built-in function
+  }
+  
+   if(strcmp(args[0], "close")==0) {
+    if(NULL!=args[1]) {
+      closefd(atoi(args[1]));
+    }
+    return 1;               // built-in function
+  }
+
+  if(strcmp(args[0], "openfile")==0) {
+    if(NULL!=args[1]) {
+      openfile(args[1]);
+    }
+    return 1;               // built-in function
+  }
+
+  if(strcmp(args[0], "read")==0) {
+    if (NULL!=args[2] && strlen(args[2])>0) {
+      int fd = atoi(args[1]);
+      int nbytes = atoi(args[2]);
+      readfd(fd, nbytes);
+    } else
+      printf("ERROR! Incorrect syntaxe. Usage: read <file_descriptor> <number_of_bytes>\n");
+    return 1;               // built-in function
+  }
+
+  if (strcmp(args[0], "fileinfo") == 0) {
+    fileinfo();
+    return 1;               // built-in function
+  }
 
 
 

@@ -18,7 +18,7 @@ int main () {
   while (1) {
     char cwd[1024];                                       /* current working directory array */
     getcwd(cwd, sizeof(cwd));
-    printf("\033[1;32m%s@%s\033[0m:\033[1;34m%s\033[0m %s> ", user, hostname, cwd, prompt);
+    printf("\033[1;34m%s\n%s\033[0m\033[1;32m@%s\033[0m %s> ", cwd, user, hostname, prompt);
     // printf ("%s", prompt);
 
     if (fgets (linha, 1023, stdin) == NULL) {

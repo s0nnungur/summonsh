@@ -178,7 +178,7 @@ int builtin (char **args) {
   }
 
   if(strcmp(args[0], "isjpeg") == 0 && args[1] != NULL) {
-    int fd = open(args[1], O_RDONLY);
+    int fd = open(args[1], O_RDONLY);     // open file for reading
     if (fd<0) {
       perror(args[1]);
       return 1;
@@ -188,12 +188,23 @@ int builtin (char **args) {
     else
         printf("%s não é JPEG!\n", args[1]);
     close(fd);
-    return 1;
+    return 1;                   // built-in function
     }
 
+  if(strcmp(args[0], "isgif") == 0 && args[1] != NULL) {
+    int fd = open(args[1], O_RDONLY);
+    if (fd<0) {
+      perror(args[1]);
+      return 1;
+    }
+    if (isgif(fd))
+        printf("%s é GIF!\n", args[1]);
+    else
+        printf("%s não é GIF!\n", args[1]);
+    close(fd);
+    return 1;               // built-in function
+  }  
 
-
-  
 
 
 

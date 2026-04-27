@@ -43,6 +43,8 @@ files.o : shell.h files.c
 	$(CC) $(FLAGS) files.c
 bitops.o : shell.h bitops.c 
 	$(CC) $(FLAGS) bitops.c
+redirect.o : shell.h redirects.c
+	$(CC) $(FLAGS) redirects.c 
 soshell : $(OBS)
 	$(CC)  -o soshell  $(OBS) $(LIBS)
 clean limpar:

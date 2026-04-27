@@ -278,6 +278,10 @@ int builtin (char **args) {
     }
   }
 
+  if(strcmp(args[0], "cat") == 0) {
+    
+  }
+
 
 
 

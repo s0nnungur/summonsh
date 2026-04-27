@@ -11,3 +11,4 @@ a.out
 *.txt
 *.pdf
 .vscode
+simularRedirect.c

@@ -221,7 +221,7 @@ int builtin (char **args) {
   if(strcmp(args[0], "isValid")==0) {
     if (NULL!=args[1]) {
       int fd=atoi(args[1]);
-      printf("%s is %s valid\n", fd, fd_is_valid(fd)? "": "nope");
+      printf("fd %d is %s valid\n", fd, fd_is_valid(fd)? "": "not");
     }
     return 1;               // built-in function
   }

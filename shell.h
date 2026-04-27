@@ -31,6 +31,7 @@
 #include <math.h>
 #include <errno.h>
 
+#define FILE_MODE (S_IRUSR | S_IWUSR)
 typedef unsigned short type;
 
 

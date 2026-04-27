@@ -20,16 +20,16 @@ char prev_dir[1024] = "";
 
 int main () {
   int len;
-  char linha[1024];                                       /* one command */
-  char *args[64];                                         /* with a max of 64 arguments */
+  char linha[1024];                                                     // one command 
+  char *args[64];                                                       // with a max of 64 arguments 
 
   strcpy (prompt, "SOSHELL: prompt>");
   gethostname(hostname, sizeof(hostname));
   user = getenv("USER");
-  getcwd(prev_dir, sizeof(prev_dir));                     /* initialize previous dir */
+  getcwd(prev_dir, sizeof(prev_dir));                                   // initialize previous dir 
 
   while (1) {
-    char cwd[1024];                                       /* current working directory array */
+    char cwd[1024];                                                     // current working directory array 
     getcwd(cwd, sizeof(cwd));
     printf("\033[1;34m%s\n%s\033[0m\033[1;32m@%s\033[0m %s> ", cwd, user, hostname, prompt);
     // printf ("%s", prompt);
@@ -42,15 +42,15 @@ int main () {
     len = strlen (linha);
     
     if (1 == len)
-      continue;                                           /* line is just \n */
+      continue;                                                         // line is just \n 
     
     if (linha[len - 1] == '\n')
       linha[len - 1] = '\0';
   
-    int numargs = parse (linha, args);                                  /* partitions the string into arguments */
+    int numargs = parse (linha, args);                                  // partitions the string into arguments 
 
     if (!builtin (args))
-      execute (numargs, args);                                     /* executes the command */
+      execute (numargs, args);                                          // executes the command
     }
   return 0;
 }
@@ -61,18 +61,18 @@ int builtin (char **args) {
   //exit /* every built in function must return 1*/
   if (strcmp (args[0], "sair") == 0) {
     exit (0);
-    return 1;                                             /* built-in functionality */
+    return 1;                                                           // built-in functionality
   }
 
   if (strncmp (args[0], "42", 2) == 0) {
     printf("42 is the answer to life the universe and everything\n");
     printf("https://pt.wikipedia.org/wiki/The_Hitchhiker's_Guide_to_the_Galaxy\n");
-    return 1;                                             /* built-in functionality */
+    return 1;                                                           // built-in functionality 
   }
 
   if (0==strcmp(args[0], "obterinfo")) {
     printf("SO Shell 2025 versão 1.0\n");
-    return 1;                                             /* built-in functionality */
+    return 1;                                                           // built-in functionality 
   }
 
   if (strlen(args[0])>4 && strncmp(args[0], "PS1=", 4) == 0) {
@@ -82,10 +82,10 @@ int builtin (char **args) {
     if (pos == NULL) {
       strcpy(prompt,args[0]+4);
     } else {
-      strncpy(prompt, args[0]+4, pos - (args[0]+4));      //  starts before \h
-      prompt[pos - (args[0]+4)] = '\0';                   //  finishes the string
-      strcat(prompt, hostname);                           //  appends hostname
-      strcat(prompt, pos + 2);                            //  starts after \h
+      strncpy(prompt, args[0]+4, pos - (args[0]+4));                    //  starts before \h
+      prompt[pos - (args[0]+4)] = '\0';                                 //  finishes the string
+      strcat(prompt, hostname);                                         //  appends hostname
+      strcat(prompt, pos + 2);                                          //  starts after \h
     }
 
     return 1; // built-in functionality
@@ -277,11 +277,6 @@ int builtin (char **args) {
       return 1;              // built-in function 
     }
   }
-
-  if(strcmp(args[0], "cat") == 0) {
-    
-  }
-
 
 
 

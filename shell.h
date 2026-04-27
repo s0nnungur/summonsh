@@ -99,7 +99,10 @@ void printBits(type num, type mask);
 void printRow(const char *expr, type num, type mask);
 /* prints a row of the bit table */
 
+int redirects(int numargs, char *args[]);
 
+
+int dupandclose(int fd, int fdold, int numargs, char *args[]);
 
 
 /* useful constants*/

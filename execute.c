@@ -33,18 +33,19 @@ void execute (int numargs, char **args) {
       pipe(fd);
       int pidChild = fork();
 
-      if(pidChild==0) {
+      if(pidChild==0) {     // grandchild
         numargs = index;
-        
         dup2(fd[1], STDOUT_FILENO); 
         close(fd[0]); close(fd[1]);
+
+        numargs = redirects(numargs, args);
         execvp(*args, args);
       } else {
         args = args + index + 1;
         numargs= numargs - index - 1;
-
         dup2(fd[0], STDIN_FILENO);
         close(fd[0]); close(fd[1]);
+        numargs = redirects(numargs, args);
         execvp (*args, args);
       }
       

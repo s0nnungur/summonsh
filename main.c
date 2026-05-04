@@ -246,7 +246,7 @@ int builtin (char **args) {
       int nbytes = atoi(args[2]);
       readfd(fd, nbytes);
     } else
-      printf("ERROR! Incorrect syntaxe. Usage: read <file_descriptor> <number_of_bytes>\n");
+      printf("ERROR! Incorrect syntax. Usage: read <file_descriptor> <number_of_bytes>\n");
     return 1;               // built-in function
   }
 

@@ -105,6 +105,8 @@ int redirects(int numargs, char *args[]);
 
 int dupandclose(int fd, int fdold, int numargs, char *args[]);
 
+int containsPipe(int numArgs, char **args);
+
 
 /* useful constants*/
 

@@ -15,6 +15,7 @@
 #define NUM_THREADS 5
 
 int x = 1;
+/* function to be executed by the new thread */
 void *funcao(void *args){
     while ( 1 == x)
     /*spin*/ ;

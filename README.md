@@ -1,37 +1,37 @@
 # summonsh
 
-A minimal Unix shell built from scratch in C.
+A Unix shell interpreter written in C, built incrementally across OS lab sessions at UBI.
 
-## Build
+## Build & Run
 
-```
+```bash
 make
 ./soshell
 ```
 
 ## Features
 
-- Execute external commands via `fork()`/`execvp()`
-- Built-in commands: `sair`, `cd`, `obterinfo`, `quemsoueu`, `socp`
-- Custom prompt with `PS1=` (supports `\h` for hostname)
-- Background execution with `&`
+- Command execution (foreground & background with `&`)
 - I/O redirection: `<`, `>`, `>>`, `2>`
-- File copy with low-level I/O (`socp src dst`)
+- Single pipes: `cmd1 | cmd2`, including `cmd1 < f | cmd2 > out`
+- Built-ins: `sair`, `cd`, `obterinfo`, `quemsoueu`, `PS1=` (with `\h`)
+- Built-ins: `socp`, `calc`, `bits`, `epsilon`, `displayBitOps`
+- Built-ins: `openfile`, `closefd`, `readfd`, `fileinfo`, `isValid`, `isjpeg`, `isgif`
 
 ## Files
 
-| File | Purpose |
-|------|---------|
-| `shell.h` | Headers and prototypes |
-| `main.c` | Main loop + built-in commands |
-| `parse.c` | Tokenizer |
-| `execute.c` | fork/exec + background |
-| `redirects.c` | I/O redirection |
-| `socp.c` | Built-in file copy |
-| `Makefile` | Build rules |
+| File | Role |
+|---|---|
+| `main.c` | Main loop, built-ins |
+| `parse.c` | Tokeniser |
+| `execute.c` | fork/exec, pipes, bg/fg |
+| `redirects.c` | `dup2`-based I/O redirection |
+| `socp.c` | Low-level file copy |
+| `calc.c` | Arithmetic + bitwise built-ins |
+| `bitops.c` | Binary/hex display helpers |
+| `files.c` | File descriptor built-ins, magic number detection |
+| `shell.h` | Shared prototypes and constants |
 
-## Clean
+## Course
 
-```
-make clean
-```
+Sistemas Operativos — Universidade da Beira Interior, 2026

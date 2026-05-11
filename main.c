@@ -278,11 +278,26 @@ int builtin (char **args) {
     }
   }
 
-  if(strcmp(args[0], "avisoTeste")) {
+  if(strcmp(args[0], "avisoTeste")==0 && args[1] != NULL && args[2] != NULL) {
     aviso(args[1], atoi(args[2]));
     return 1;
-
   }
+
+  if(strcmp(args[0], "avisomau")==0) {
+    pthread_t th;
+    pthread_create(&th, NULL, avisowrapperMAU, (void *)args);
+    return 1;
+  }
+  
+  if(strcmp(args[0], "aviso")==0) { //wrapper
+    pthread_t th;
+    aviso_t * ptr = (aviso_t *)malloc(sizeof(aviso_t));
+    strcpy(ptr->msg, args[1]);
+    ptr->tempo=atoi(args[2]);
+    pthread_create(&th,NULL,avisowrapper,(void*)ptr);
+    return 1;
+    }
+
 
 
 

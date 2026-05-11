@@ -33,7 +33,10 @@
 
 #define FILE_MODE (S_IRUSR | S_IWUSR)
 typedef unsigned short type;
-
+typedef struct {
+    char msg[100];
+    int tempo;
+} aviso_t;
 
 int parse(char *buf, char **args); 
 /* parses the input buffer and fills the arguments array */
@@ -106,6 +109,13 @@ int redirects(int numargs, char *args[]);
 int dupandclose(int fd, int fdold, int numargs, char *args[]);
 
 int containsPipe(int numArgs, char **args);
+
+void aviso(char *arg, int n);  
+// adjust return type + signature to match
+
+void * avisowrapperMAU(void *args);
+
+void * avisowrapper(void *args);
 
 
 /* useful constants*/

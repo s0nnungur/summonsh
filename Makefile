@@ -24,7 +24,7 @@
 CC=cc
 FLAGS=-c -Wall
 LIBS=-lm
-OBS=main.o execute.o parse.o socp.o calc.o files.o bitops.o redirects.o
+OBS=main.o execute.o parse.o socp.o calc.o files.o bitops.o redirects.o threads.o
 
 #Alvo por defeito é o primeiro
 all :  soshell

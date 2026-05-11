@@ -7,12 +7,10 @@
 /*  ╚═════╝░░╚═════╝░╚═╝░░░░░╚═╝╚═╝░░░░░╚═╝░╚════╝░╚═╝░░╚══╝╚═════╝░╚═╝░░╚═╝ */ 
 /* ========================================================================= */
 /* Author : s0nnungur  (José Miguel Santos)                                  */
-/* Date   : 30-04-2026                                                             */
+/* Date   : 11-05-2026                                                             */
 /* Desc   : Unix shell written in C                                          */
 /* ========================================================================= */
-#include <stdio.h>
-#include <pthread.h>
-
+#include "shell.h"
 
 void aviso (char *msg, int tempo) {
     while (tempo >0) {
@@ -20,4 +18,17 @@ void aviso (char *msg, int tempo) {
         tempo--;
     }
     fprintf(stderr, "Aviso : %s\n", msg);
+}
+
+void * avisowrapperMAU(void *args) {
+    char ** pargs = (char **)args;
+    aviso(pargs[1], atoi(pargs[2]));
+    return NULL;
+}
+
+void * avisowrapper(void *args) { //unwrap it
+    aviso_t * ptr = (aviso_t *)args;
+    aviso(ptr->msg, ptr->tempo);
+    free(ptr);
+    return NULL;
 }

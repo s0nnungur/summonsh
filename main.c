@@ -278,6 +278,12 @@ int builtin (char **args) {
     }
   }
 
+  if(strcmp(args[0], "avisoTeste")) {
+    aviso(args[1], atoi(args[2]));
+    return 1;
+
+  }
+
 
 
   /* IMPORTANT: 

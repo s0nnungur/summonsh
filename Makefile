@@ -45,8 +45,8 @@ bitops.o : shell.h bitops.c
 	$(CC) $(FLAGS) bitops.c
 redirects.o : shell.h redirects.c
 	$(CC) $(FLAGS) redirects.c 
-# threads.o : shell.h threads.c
-#	$(CC) $(FLAGS) threads.c
+threads.o : shell.h threads.c
+	$(CC) $(FLAGS) threads.c
 soshell : $(OBS)
 	$(CC)  -o soshell  $(OBS) $(LIBS)
 clean limpar:

@@ -12,12 +12,31 @@
 /* ========================================================================= */
 #include <stdio.h>
 #include <pthread.h>
+#define NUM_THREADS 5
+
+int x=1;
+
+/* function to be executed by the new thread */
+void *funcao(void *args){
+    while ( 1 == x)
+    /*spin*/ ;
+    printf("OLA %d\n",*(int*)args);
+    return (NULL);
+}
 
 
-void aviso (char *msg, int tempo) {
-    while (tempo >0) {
-        sleep (1);
-        tempo--;
+int main(){
+    pthread_t threads[NUM_THREADS];
+    int i, ids[NUM_THREADS];
+    for (i=0; i < NUM_THREADS; i++){
+        ids[i]=i;
+        pthread_create(&threads[i], NULL, funcao, &ids[i]);
     }
-    fprintf(stderr, "Aviso : %s\n", msg);
+ 
+    printf("Inspecionar as threads e depois Carregar na tecla enter\n");
+    getchar();
+    x = 2;
+    for (i = 0; i < NUM_THREADS; i++)
+        pthread_join(threads[i], NULL); /* Espera a junção das threads */
+    return 0; /* O programa chegará aqui. */
 }

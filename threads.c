@@ -11,6 +11,8 @@
 /* Desc   : Unix shell written in C                                          */
 /* ========================================================================= */
 #include "shell.h"
+char strings[MAX][130];
+int k = 0;
 
 void aviso (char *msg, int tempo) {
     while (tempo >0) {
@@ -34,13 +36,24 @@ void * avisowrapper(void *args) { //unwrap it
 }
 
 void * cpWrapper(void *args) {
-    //receber void *args e cast para tipo copiar_t
+    //receives void *args and casts to type copiar_t
     copiar_t *fi = (copiar_t *)args;
-    //Chamar socp com os campos da struct
+    //call socp with struct fields
     socp(fi->src,fi->dest,fi->blksize);
-    //libertar memoria e devolver null
+
+    time_t tempoAtual;
+    time(&tempoAtual);
+
+    //converts to readable string
+    char *diaHora = ctime(&tempoAtual);
+
+    //removes '\n' from string end
+    if ('\n' == diaHora[strlen(diaHora)-1]) 
+        diaHora[strlen(diaHora)-1] = '\0';
+
+    //writes entry to global array
+    sprintf(strings[k++%MAX], "%s %s -> %s", diaHora, fi->src, fi->dest);
+
     free(fi);
     return NULL;
 }
-
-//syntax: socpthread src dest [blksize]

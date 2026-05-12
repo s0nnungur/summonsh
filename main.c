@@ -314,6 +314,12 @@ int builtin (char **args) {
     return 1;                   
   }
 
+  if(strcmp(args[0], "infoCopias")==0) {
+    int n = (k < MAX) ? k : MAX;
+    for (int i = 0; i < n; i++)
+        printf("%s\n", strings[i]);
+    return 1;
+  }
 
 
   /* IMPORTANT: 

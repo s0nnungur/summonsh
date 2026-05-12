@@ -30,8 +30,15 @@
 #include <float.h>
 #include <math.h>
 #include <errno.h>
+#include <time.h>
+
 
 #define FILE_MODE (S_IRUSR | S_IWUSR)
+
+#define MAX 100
+extern char strings[MAX][130];
+extern int k;
+
 typedef unsigned short type;
 typedef struct {
     char msg[100];
@@ -43,6 +50,7 @@ typedef struct {
     char dest[100];
     int blksize;
 } copiar_t;
+
 
 int parse(char *buf, char **args); 
 /* parses the input buffer and fills the arguments array */

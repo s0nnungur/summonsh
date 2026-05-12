@@ -13,23 +13,28 @@
 
 
 #include "shell.h"
-#define BUFSIZE 4096
+// #define BUFSIZE 4096
 
-void ioCopy(int IN, int OUT) {
+void ioCopy(int IN, int OUT, int blksize) {
     int n;
-    char buf[BUFSIZE];
-    while ((n=read(IN,buf,BUFSIZE))>0) {
+    char *buf = (char*)malloc(blksize);
+    if (buf == NULL) {
+      perror("error alocating memory!");
+      return;
+    }
+    while ((n=read(IN,buf,blksize))>0) {
       if(write(OUT,buf,n) != n) 
         perror("write error");
     }
     if (n<0)
       perror("read error");
+    free(buf);
 
     // loop: read -> write até não haver mais dados
     // tratamento de erros com perror
 }
 
-void socp(char *fonte, char *destino) {
+void socp(char *fonte, char *destino, int buffsize) {
   int fdIn = open(fonte, O_RDONLY);
     if (fdIn < 0) {
         perror("Error! Can't open source file");
@@ -43,7 +48,7 @@ void socp(char *fonte, char *destino) {
         return;
     }
 
-  ioCopy (fdIn, fdOut);
+  ioCopy (fdIn, fdOut, buffsize);
   close(fdIn);
   close(fdOut);
 }

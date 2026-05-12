@@ -12,6 +12,7 @@
 /* ========================================================================= */
 
 #include "shell.h"
+#define BUFSIZE 4096
 
 char prompt[100];
 char hostname[256];
@@ -156,11 +157,11 @@ int builtin (char **args) {
   }
 
   if(0 == strcmp(args[0], "socp")) {
-    if (args[1] != NULL && args[2] != NULL)
-      socp(args[1], args[2]);
-    else 
-      printf("Incorrect syntax: Usage: socp source destination\n");
-
+    if (args[1]!=NULL && args[2]!=NULL) {
+      int blksize=(args[3] != NULL) ? atoi(args[3]) : BUFSIZE;
+      socp(args[1], args[2], blksize);
+    } else
+      printf("Incorrect syntax: Usage: socp source destination [blksize]\n");
     return 1;                   
   }
 
@@ -299,14 +300,15 @@ int builtin (char **args) {
     }
   
   if(strcmp(args[0], "socpthread")==0 ) {
-    if (args[1] != NULL && args[2] != NULL) {
+    if (args[1] != NULL && args[2] != NULL && args[3] != NULL) {
       pthread_t th;
       copiar_t * ptr = (copiar_t *)malloc(sizeof(copiar_t));
       strcpy(ptr->src, args[1]);
       strcpy(ptr->dest, args[2]);
+      ptr->buffsize = atoi(args[3]);
       pthread_create(&th,NULL,cpWrapper,(void*)ptr);
     } else 
-      printf("Incorrect syntax: Usage: socpthread source destination\n");
+      printf("Incorrect syntax: Usage: socpthread source destination blksize\n");
     return 1;                   
   }
 

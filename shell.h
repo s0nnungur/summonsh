@@ -41,6 +41,7 @@ typedef struct {
 typedef struct {
     char src[100];
     char dest[100];
+    int bufsize;
 } copiar_t;
 
 int parse(char *buf, char **args); 
@@ -52,7 +53,7 @@ void execute(int numargs, char **args);
 int builtin (char **args);
 /* built-in function that checks if the command is a built-in command and executes it if so. */
 
-void socp(char *fonte, char *destino);
+void socp(char *fonte, char *destino, int buffsize);
 /* built-in function that copies the content of a file (source) 
 to another file (destination) using low-level I/O system calls (open, read, write, close). */
 

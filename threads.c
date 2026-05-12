@@ -37,7 +37,7 @@ void * cpWrapper(void *args) {
     //receber void *args e cast para tipo copiar_t
     copiar_t *fi = (copiar_t *)args;
     //Chamar socp com os campos da struct
-    socp(fi->src,fi->dest,fi->buffsize);
+    socp(fi->src,fi->dest,fi->blksize);
     //libertar memoria e devolver null
     free(fi);
     return NULL;

@@ -41,7 +41,7 @@ typedef struct {
 typedef struct {
     char src[100];
     char dest[100];
-    int bufsize;
+    int blksize;
 } copiar_t;
 
 int parse(char *buf, char **args); 
@@ -57,7 +57,7 @@ void socp(char *fonte, char *destino, int buffsize);
 /* built-in function that copies the content of a file (source) 
 to another file (destination) using low-level I/O system calls (open, read, write, close). */
 
-void ioCopy(int IN, int OUT); 
+void ioCopy(int IN, int OUT, int blksize); 
 /* built-in function that copies the content of a file (source) 
 to another file (destination) using low-level I/O system calls (open, read, write, close). */
 

@@ -34,7 +34,7 @@ void ioCopy(int IN, int OUT, int blksize) {
     // tratamento de erros com perror
 }
 
-void socp(char *fonte, char *destino, int buffsize) {
+void socp(char *fonte, char *destino, int blksize) {
   int fdIn = open(fonte, O_RDONLY);
     if (fdIn < 0) {
         perror("Error! Can't open source file");
@@ -48,7 +48,7 @@ void socp(char *fonte, char *destino, int buffsize) {
         return;
     }
 
-  ioCopy (fdIn, fdOut, buffsize);
+  ioCopy (fdIn, fdOut, blksize);
   close(fdIn);
   close(fdOut);
 }

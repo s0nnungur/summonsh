@@ -300,15 +300,17 @@ int builtin (char **args) {
     }
   
   if(strcmp(args[0], "socpthread")==0 ) {
-    if (args[1] != NULL && args[2] != NULL && args[3] != NULL) {
+    if (args[1] != NULL && args[2] != NULL) {
       pthread_t th;
       copiar_t * ptr = (copiar_t *)malloc(sizeof(copiar_t));
       strcpy(ptr->src, args[1]);
       strcpy(ptr->dest, args[2]);
-      ptr->buffsize = atoi(args[3]);
+
+      ptr->blksize=(args[3] != NULL) ? atoi(args[3]) : BUFSIZE;
+
       pthread_create(&th,NULL,cpWrapper,(void*)ptr);
     } else 
-      printf("Incorrect syntax: Usage: socpthread source destination blksize\n");
+      printf("Incorrect syntax: Usage: socpthread source destination [blksize]\n");
     return 1;                   
   }
 

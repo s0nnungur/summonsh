@@ -32,13 +32,13 @@ void ioCopy(int IN, int OUT) {
 void socp(char *fonte, char *destino) {
   int fdIn = open(fonte, O_RDONLY);
     if (fdIn < 0) {
-        perror("Erro a abrir o ficheiro de fonte");
+        perror("Error! Can't open source file");
         return;
     }
 
   int fdOut = creat(destino, S_IRUSR | S_IWUSR);
     if (fdOut < 0) {
-        perror("Erro a abrir o ficheiro de destino");
+        perror("Error! Can't open source file");
         close(fdIn);
         return;
     }

@@ -38,6 +38,11 @@ typedef struct {
     int tempo;
 } aviso_t;
 
+typedef struct {
+    char src[100];
+    char dest[100];
+} copiar_t;
+
 int parse(char *buf, char **args); 
 /* parses the input buffer and fills the arguments array */
 
@@ -116,6 +121,8 @@ void aviso(char *arg, int n);
 void * avisowrapperMAU(void *args);
 
 void * avisowrapper(void *args);
+
+void * cpWrapper(void *args);
 
 
 /* useful constants*/

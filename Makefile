@@ -24,7 +24,7 @@
 CC=cc
 FLAGS=-c -Wall
 LIBS=-lm
-OBS=main.o execute.o parse.o socp.o calc.o files.o bitops.o redirects.o threads.o
+OBS=main.o execute.o parse.o socp.o calc.o files.o bitops.o redirects.o threads.o socpthread.o
 
 #Alvo por defeito é o primeiro
 all :  soshell
@@ -47,6 +47,8 @@ redirects.o : shell.h redirects.c
 	$(CC) $(FLAGS) redirects.c 
 threads.o : shell.h threads.c
 	$(CC) $(FLAGS) threads.c
+socpthread.o : shell.h socpthread.c
+	$(CC) $(FLAGS) socpthread.c
 soshell : $(OBS)
 	$(CC)  -o soshell  $(OBS) $(LIBS)
 clean limpar:

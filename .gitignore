@@ -1,5 +1,8 @@
 # Compiled objects
 *.o
+.claude
+CLAUDE.md
+AGENTS.md
 
 # Executables
 soshell

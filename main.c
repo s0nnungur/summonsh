@@ -310,8 +310,9 @@ int builtin (char **args) {
 
       pthread_create(&th,NULL,cpWrapper,(void*)ptr);
     } else 
-      printf("Incorrect syntax: Usage: socpthread source destination [blksize]\n");
-    return 1;                   
+      printf("Incorrect syntax: Usage: socpthread <source> <destination> [blksize]\n");
+    return 1;             
+    
   }
 
   if(strcmp(args[0], "infoCopias")==0) {
@@ -320,6 +321,15 @@ int builtin (char **args) {
         printf("%s\n", strings[i]);
     return 1;
   }
+
+   if (strcmp(args[0], "maior") == 0) {
+    if (args[1] != NULL && args[2] != NULL)
+      maior(args[1], args[2]);
+    else printf("Incorrect syntax: Usage: maior <file1> <file2>\n");
+    return 1; //built in
+  }
+
+  
 
 
   /* IMPORTANT: 

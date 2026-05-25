@@ -31,6 +31,7 @@
 #include <math.h>
 #include <errno.h>
 #include <time.h>
+#include <dirent.h>
 
 
 #define FILE_MODE (S_IRUSR | S_IWUSR)
@@ -132,6 +133,9 @@ void * avisowrapperMAU(void *args);
 void * avisowrapper(void *args);
 
 void * cpWrapper(void *args);
+
+void maior(char *f1, char *f2);
+// prints the name and size of the larger of two files using stat()
 
 
 /* useful constants*/

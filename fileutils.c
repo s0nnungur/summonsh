@@ -99,7 +99,9 @@ void sols(char *dir) {
             return;
         }
 
-        printf("name: %s\tinode: %lu\tsize: %ld\n", dirp->d_name, dirp->d_ino,statbuf.st_size);
+        char *mtime = ctime(&statbuf.st_mtime);
+
+        printf("name: %s\tinode: %lu\tsize: %ld\tlast modified: %s", dirp->d_name, dirp->d_ino,statbuf.st_size,mtime);
     }
 
     closedir(dp);

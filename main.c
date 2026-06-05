@@ -278,10 +278,11 @@ int builtin (char **args) {
 
     type um=atoi(args[1]), dois=atoi(args[2]), mask=0x8000;                       // 1000 0000 0000 0000
 
-    if (um > 65535 || um < 0 || dois > 65535 || dois < 0)
+    if (um > 65535 || um < 0 || dois > 65535 || dois < 0) {
       printf("Syntax error: Numbers must be between 0 and 65535 (inclusive)\n");
+      return 1;
 
-    else {  
+  } else {  
       printf("\nExpression\t\tbin\t\t\tdec\toct\thex\n");
 
       printRow("um\t\t",          um,          mask);

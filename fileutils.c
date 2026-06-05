@@ -18,12 +18,12 @@ void maior(char *f1, char *f2) {
     long int size1,size2;
 
     if (stat(f1, &statbuf1) < 0) {
-        perror(f1); // prints: "f1: No such file or directory"
+        perror(f1);
         return;
     }
     
     if(stat(f2, &statbuf2) < 0) {
-        perror(f2); // prints: "f1: No such file or directory"
+        perror(f2); 
         return;
     }
 
@@ -42,7 +42,7 @@ void setx(char *file) {
     struct stat statbuf;
 
     if (stat(file, &statbuf) < 0) {
-        perror(file); // prints: "file: No such file or directory"
+        perror(file); 
         return;
     }
 
@@ -60,7 +60,7 @@ void removerl(char *file) {
     struct stat statbuf;
 
     if (stat(file, &statbuf) < 0) {
-        perror(file); // prints: "file: No such file or directory"
+        perror(file); 
         return;
     }
 
@@ -96,7 +96,7 @@ void sols(char *dir) {
 
         if(stat(path, &statbuf) < 0) {
             perror(path);
-            return;
+            continue;
         }
 
         char *mtime = ctime(&statbuf.st_mtime);

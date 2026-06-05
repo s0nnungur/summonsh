@@ -265,18 +265,22 @@ int builtin (char **args) {
   if (strcmp(args[0], "fileinfo") == 0) {
     fileinfo();
 
-    return 1;                                       // built-in function
+    return 1;                                                                     // built-in function
   }
 
   if(strcmp(args[0], "displayBitOps") == 0) {
-
-    type um=atoi(args[1]), dois=atoi(args[2]), mask=0x8000; //1000 0000 0000 0000
-
                                                   
-    if(args[1]==NULL || args[2]==NULL)              // check if arguments are valid
-      printf("ERROR! Incorrect syntaxe. Usage: displayBitOps <num1> <num2>\n");
-    else if (um > 65535 || um < 0 || dois > 65535 || dois < 0)
-      printf("ERROR! Numbers must be between 0 and 65535 (inclusive)\n");
+    if(args[1]==NULL || args[2]==NULL) {                                           // check if arguments are valid
+      printf("Syntax error: Usage: displayBitOps <num1> <num2>\n");
+
+      return 1;
+    }
+
+    type um=atoi(args[1]), dois=atoi(args[2]), mask=0x8000;                       // 1000 0000 0000 0000
+
+    if (um > 65535 || um < 0 || dois > 65535 || dois < 0)
+      printf("Syntax error: Numbers must be between 0 and 65535 (inclusive)\n");
+
     else {  
       printf("\nExpression\t\tbin\t\t\tdec\toct\thex\n");
 
@@ -350,7 +354,7 @@ int builtin (char **args) {
   if (strcmp(args[0], "setx") == 0) {
     if (args[1] != NULL)
       setx(args[1]);
-    else printf("Syntax error: Usage: setx <file_name>");
+    else printf("Syntax error: Usage: setx <file_name>\n");
 
     return 1;           
   }
@@ -358,26 +362,21 @@ int builtin (char **args) {
   if (strcmp(args[0], "removerl") == 0) {
     if (args[1] != NULL)
       removerl(args[1]);
-    else printf("Syntax error: Usage: removerl <file_name>");
+    else printf("Syntax error: Usage: removerl <file_name>\n");
 
     return 1;
   }
 
   if (strcmp(args[0], "sols") == 0) {
-    if (args[1] != NULL)
-      sols(args[1]);
-    else printf("Syntax error: Usage: sols <directory>");
-
+    sols(args[1]);
     return 1;
   }
 
-  
-  
 
 
   /* IMPORTANT: 
    Return 0 to indicate that there's no built in functionality and that 
-   it will be executed through exec() within the funciton execute.c
+   it will be executed through exec() within the function execute.c
   */
 
   return 0;

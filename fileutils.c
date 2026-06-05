@@ -74,3 +74,33 @@ void removerl(char *file) {
 
     printf("\nReading permission removed for group/others in %s\n", file);
 }
+
+void sols(char *dir) {
+    struct dirent *dirp;
+    DIR *dp;
+    
+    char path[1024];
+
+    if(dir == NULL)
+        dir = ".";
+
+    if ((dp=opendir(dir)) == NULL) {
+        perror(dir);
+        return;
+    }
+
+    while((dirp = readdir(dp)) != NULL) {
+        struct stat statbuf;
+
+        snprintf(path, sizeof(path), "%s/%s", dir, dirp->d_name);
+
+        if(stat(path, &statbuf) < 0) {
+            perror(path);
+            return;
+        }
+
+        printf("name: %s\tinode: %lu\tsize: %ld\n", dirp->d_name, dirp->d_ino,statbuf.st_size);
+    }
+
+    closedir(dp);
+}

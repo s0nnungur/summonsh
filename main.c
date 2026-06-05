@@ -362,6 +362,16 @@ int builtin (char **args) {
 
     return 1;
   }
+
+  if (strcmp(args[0], "sols") == 0) {
+    if (args[1] != NULL)
+      sols(args[1]);
+    else printf("Syntax error: Usage: sols <directory>");
+
+    return 1;
+  }
+
+  
   
 
 

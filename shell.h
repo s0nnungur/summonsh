@@ -138,10 +138,13 @@ void maior(char *f1, char *f2);
 // prints the name and size of the larger of two files using stat()
 
 void setx(char *file);
-// gives execute permission to file owner from file
+// gives execute permission to file owner from <file>
 
 void removerl(char *file);
-// removes read permission to group and all from file
+// removes read permission to group and all from <file>
+
+void sols(char *dir);
+// prints name, inode a filesize from files in the directory <dir>
 
 /* useful constants*/
 

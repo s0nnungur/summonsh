@@ -121,6 +121,7 @@ int builtin (char **args) {
         printf("%d", lista[i]);
     }
     printf("\n");
+
       return 1;                                            // built-in functionality
   }
 
@@ -132,12 +133,16 @@ int builtin (char **args) {
 
     if (NULL == args[1] || strcmp(args[1], "~") == 0 || strcmp(args[1], "$HOME") == 0)  {
       destino = getenv("HOME");                           // finds home directory
+
     } else if (0 == (strcmp(args[1], "-"))) {
       if (0 == (strlen(prev_dir))) {
         printf("cd: OLDPWD not set\n");
+
         return 1;
       }
+
       destino = prev_dir;
+
     } else 
       destino = args[1];
 
@@ -162,6 +167,7 @@ int builtin (char **args) {
       socp(args[1], args[2], blksize);
     } else
       printf("Syntax error: Usage: socp <source> <destination> [blksize]\n");
+
     return 1;                   
   }
 
@@ -174,25 +180,25 @@ int builtin (char **args) {
       while ((1.0f + eps / 2.0f) != 1.0f) eps /= 2.0f;
       printf("calculated: %10e\n",eps);
 
-    return 1;                           //built in function
+    return 1;                                         //built in function
   }
 
   if(strcmp(args[0], "calc")==0 && args[1]!= NULL && args[2] != NULL && args[3] != NULL) {
     //chamar funcao calc
     calc(args[1],args[2],args[3]);
 
-    return 1;                            // built-in function
+    return 1;                                         // built-in function
   }
 
   if(strcmp(args[0], "bits")==0 && args[1]!= NULL && args[2] != NULL && args[3] != NULL) {
     //chama funcao bits
     bits(args[1],args[2],args[3]);
 
-    return 1;                            // built-in function
+    return 1;                                         // built-in function
   }
 
   if(strcmp(args[0], "isjpeg") == 0 && args[1] != NULL) {
-    int fd = open(args[1], O_RDONLY);     // open file for reading
+    int fd = open(args[1], O_RDONLY);                 // open file for reading
     if (fd<0) {
       perror(args[1]);
       return 1;
@@ -202,8 +208,9 @@ int builtin (char **args) {
     else
         printf("%s isn't JPEG!\n", args[1]);
     close(fd);
-    return 1;                   // built-in function
-    }
+
+    return 1;                                         // built-in function
+  }
 
   if(strcmp(args[0], "isgif") == 0 && args[1] != NULL) {
     int fd = open(args[1], O_RDONLY);
@@ -211,12 +218,14 @@ int builtin (char **args) {
       perror(args[1]);
       return 1;
     }
+
     if (isgif(fd))
         printf("%s is a GIF!\n", args[1]);
     else
         printf("%s isn't a GIF!\n", args[1]);
     close(fd);
-    return 1;               // built-in function
+
+    return 1;                                       // built-in function
   }  
 
   if(strcmp(args[0], "isValid")==0) {
@@ -224,21 +233,22 @@ int builtin (char **args) {
       int fd=atoi(args[1]);
       printf("fd %d is %s valid\n", fd, fd_is_valid(fd)? "": "not");
     }
-    return 1;               // built-in function
+
+    return 1;                                       // built-in function
   }
   
    if(strcmp(args[0], "close")==0) {
-    if(NULL!=args[1]) {
+    if(NULL!=args[1]) 
       closefd(atoi(args[1]));
-    }
-    return 1;               // built-in function
+    
+    return 1;                                       // built-in function
   }
 
   if(strcmp(args[0], "openfile")==0) {
-    if(NULL!=args[1]) {
+    if(NULL!=args[1]) 
       openfile(args[1]);
-    }
-    return 1;               // built-in function
+    
+    return 1;                                       // built-in function
   }
 
   if(strcmp(args[0], "read")==0) {
@@ -248,20 +258,22 @@ int builtin (char **args) {
       readfd(fd, nbytes);
     } else
       printf("Syntax error: Usage: read <file_descriptor> <number_of_bytes>\n");
-    return 1;               // built-in function
+
+    return 1;                                       // built-in function
   }
 
   if (strcmp(args[0], "fileinfo") == 0) {
     fileinfo();
-    return 1;               // built-in function
+
+    return 1;                                       // built-in function
   }
 
   if(strcmp(args[0], "displayBitOps") == 0) {
 
     type um=atoi(args[1]), dois=atoi(args[2]), mask=0x8000; //1000 0000 0000 0000
 
-    // check if arguments are valid
-    if(args[1]==NULL || args[2]==NULL)   
+                                                  
+    if(args[1]==NULL || args[2]==NULL)              // check if arguments are valid
       printf("ERROR! Incorrect syntaxe. Usage: displayBitOps <num1> <num2>\n");
     else if (um > 65535 || um < 0 || dois > 65535 || dois < 0)
       printf("ERROR! Numbers must be between 0 and 65535 (inclusive)\n");
@@ -275,27 +287,30 @@ int builtin (char **args) {
       printRow("um ^ dois\t",   um ^ dois,   mask);
       printRow("um & ~dois\t",  um & ~dois,  mask);
 
-      return 1;              // built-in function 
+      return 1;                                     // built-in function 
     }
   }
 
   if(strcmp(args[0], "avisoTeste")==0 && args[1] != NULL && args[2] != NULL) {
     aviso(args[1], atoi(args[2]));
+
     return 1;
   }
 
   if(strcmp(args[0], "avisomau")==0) {
     pthread_t th;
     pthread_create(&th, NULL, avisowrapperMAU, (void *)args);
+
     return 1;
   }
   
-  if(strcmp(args[0], "aviso")==0) { //wrapper
+  if(strcmp(args[0], "aviso")==0) {                 //wrapper
     pthread_t th;
     aviso_t * ptr = (aviso_t *)malloc(sizeof(aviso_t));
     strcpy(ptr->msg, args[1]);
     ptr->tempo=atoi(args[2]);
     pthread_create(&th,NULL,avisowrapper,(void*)ptr);
+
     return 1;
     }
   
@@ -311,6 +326,7 @@ int builtin (char **args) {
       pthread_create(&th,NULL,cpWrapper,(void*)ptr);
     } else 
       printf("Syntax error: Usage: socpthread <source> <destination> [blksize]\n");
+
     return 1;             
     
   }
@@ -319,6 +335,7 @@ int builtin (char **args) {
     int n = (k < MAX) ? k : MAX;
     for (int i = 0; i < n; i++)
         printf("%s\n", strings[i]);
+
     return 1;
   }
 
@@ -326,19 +343,24 @@ int builtin (char **args) {
     if (args[1] != NULL && args[2] != NULL)
       maior(args[1], args[2]);
     else printf("Syntax error: Usage: maior <file_name1> <file_name2>\n");
-    return 1; //built in
+
+    return 1; 
   }
   
   if (strcmp(args[0], "setx") == 0) {
     if (args[1] != NULL)
       setx(args[1]);
     else printf("Syntax error: Usage: setx <file_name>");
+
+    return 1;           
   }
 
   if (strcmp(args[0], "removerl") == 0) {
     if (args[1] != NULL)
       setx(args[1]);
     else printf("Syntax error: Usage: removerl <file_name>");
+
+    return 1;
   }
   
 

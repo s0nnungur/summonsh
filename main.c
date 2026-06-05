@@ -357,7 +357,7 @@ int builtin (char **args) {
 
   if (strcmp(args[0], "removerl") == 0) {
     if (args[1] != NULL)
-      setx(args[1]);
+      removerl(args[1]);
     else printf("Syntax error: Usage: removerl <file_name>");
 
     return 1;

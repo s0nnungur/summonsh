@@ -64,5 +64,13 @@ void removerl(char *file) {
         return;
     }
 
-    
+    int mask = S_IRGRP | S_IROTH;
+    int remove_read = statbuf.st_mode & ~mask;
+
+    if (chmod(file, remove_read) < 0) {
+        perror(file);
+        return;
+    }
+
+    printf("\nReading permission removed for group/others in %s\n", file);
 }

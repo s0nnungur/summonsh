@@ -106,7 +106,7 @@ int builtin (char **args) {
     
     if (pw) 
       printf("uid=%d(%s)\n", uid, pw->pw_name);
-    else perror("ERROR! quemsoueu ");
+    else perror("quemsoueu");
 
     if (gr)
       printf("gid=%d(%s) ", gid, gr->gr_name);
@@ -161,7 +161,7 @@ int builtin (char **args) {
       int blksize=(args[3] != NULL) ? atoi(args[3]) : BUFSIZE;
       socp(args[1], args[2], blksize);
     } else
-      printf("Incorrect syntax: Usage: socp source destination [blksize]\n");
+      printf("Syntax error: Usage: socp <source> <destination> [blksize]\n");
     return 1;                   
   }
 
@@ -247,7 +247,7 @@ int builtin (char **args) {
       int nbytes = atoi(args[2]);
       readfd(fd, nbytes);
     } else
-      printf("ERROR! Incorrect syntax. Usage: read <file_descriptor> <number_of_bytes>\n");
+      printf("Syntax error: Usage: read <file_descriptor> <number_of_bytes>\n");
     return 1;               // built-in function
   }
 
@@ -310,7 +310,7 @@ int builtin (char **args) {
 
       pthread_create(&th,NULL,cpWrapper,(void*)ptr);
     } else 
-      printf("Incorrect syntax: Usage: socpthread <source> <destination> [blksize]\n");
+      printf("Syntax error: Usage: socpthread <source> <destination> [blksize]\n");
     return 1;             
     
   }
@@ -325,10 +325,21 @@ int builtin (char **args) {
   if (strcmp(args[0], "maior") == 0) {
     if (args[1] != NULL && args[2] != NULL)
       maior(args[1], args[2]);
-    else printf("Incorrect syntax: Usage: maior <file1> <file2>\n");
+    else printf("Syntax error: Usage: maior <file_name1> <file_name2>\n");
     return 1; //built in
   }
+  
+  if (strcmp(args[0], "setx") == 0) {
+    if (args[1] != NULL)
+      setx(args[1]);
+    else printf("Syntax error: Usage: setx <file_name>");
+  }
 
+  if (strcmp(args[0], "removerl") == 0) {
+    if (args[1] != NULL)
+      setx(args[1]);
+    else printf("Syntax error: Usage: removerl <file_name>");
+  }
   
 
 

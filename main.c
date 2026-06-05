@@ -322,7 +322,7 @@ int builtin (char **args) {
     return 1;
   }
 
-   if (strcmp(args[0], "maior") == 0) {
+  if (strcmp(args[0], "maior") == 0) {
     if (args[1] != NULL && args[2] != NULL)
       maior(args[1], args[2]);
     else printf("Incorrect syntax: Usage: maior <file1> <file2>\n");

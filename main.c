@@ -18,6 +18,10 @@ char prompt[100];
 char hostname[256];
 char *user;
 char prev_dir[1024] = "";
+char history[HIST_SIZE][1024];
+int hist_index = 0;
+int hist_count = 0;
+
 
 int main () {
   int len;
@@ -39,6 +43,12 @@ int main () {
       printf ("\n");
       exit (0);
     }
+
+    // command history
+    strcpy(history[hist_index], linha);
+    hist_index = (hist_index + 1) % HIST_SIZE;
+    if (hist_count < HIST_SIZE) 
+      hist_count++;
 
     len = strlen (linha);
     
@@ -371,6 +381,17 @@ int builtin (char **args) {
   if (strcmp(args[0], "sols") == 0) {
     sols(args[1]);
     return 1;
+  }
+
+  if (strcmp(args[0], "history") == 0) {
+    int start = (hist_index - hist_count + HIST_SIZE) % HIST_SIZE;
+
+    for (int i=0; i<hist_count; i++) {
+      int j = (start+i) % HIST_SIZE;
+      printf("%d %s", i+1, history[j]);
+    }
+
+    return 1;             // built in
   }
 
 

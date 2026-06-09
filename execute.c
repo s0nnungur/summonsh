@@ -29,6 +29,14 @@ int safeexec(char *cmd, char **args) {
   exit(1);
 }
 
+int containsSeq (int numArgs, char **args) {
+  for (int index=0;index<numArgs;index++) {
+    if(args[index][0] == ';')
+      return index;
+    return -1;
+  }
+}
+
 void execute (int numargs, char **args) {
   int pid, status, fd[2];
   int code = ultimo(&numargs, args);
@@ -40,6 +48,17 @@ void execute (int numargs, char **args) {
 
   if (pid == 0) {
     int index = containsPipe(numargs, args);
+    int seqIdx = containsSeq(numargs, args);
+  if (seqIdx > 0) {
+    args[seqIdx] = NULL;              
+    int numargs1 = seqIdx;            // args do primeiro comando
+    int numargs2 = numargs - seqIdx - 1;  // args do segundo comando
+    char **args2 = args + seqIdx + 1;     // apontador para segundo comando
+
+    // executar primeiro comando
+    // pode ser builtin ou externo — como fazemos?
+    // Dica: não podemos chamar builtin() diretamente porque estamos no filho...
+  }
 
     if(index>0) {
       //tem pipe -> criar pipe, fork, dup2, execvp nos dois casos

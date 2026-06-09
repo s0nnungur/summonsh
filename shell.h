@@ -37,7 +37,11 @@
 #define FILE_MODE (S_IRUSR | S_IWUSR)
 
 #define MAX 100
+#define HIST_SIZE 10
 extern char strings[MAX][130];
+extern char history[HIST_SIZE][1024];  // CIRCULAR ARRAY OF 10 STRINGS
+extern int hist_index;             // current index (next position to write)
+extern int hist_count;             // how many commands have been sent (up to 10)
 extern int k;
 
 typedef unsigned short type;
@@ -148,6 +152,9 @@ void sols(char *dir);
 
 int safeexec(char *cmd, char **args);
 // verifies if a command is safe to be ran
+
+int containsSeq (int numArgs, char **args);
+// auxiliary function to detect symbol in a sequence
 
 
 /* useful constants*/

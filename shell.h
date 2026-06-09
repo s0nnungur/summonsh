@@ -146,6 +146,10 @@ void removerl(char *file);
 void sols(char *dir);
 // prints name, inode a filesize from files in the directory <dir>
 
+int safeexec(char *cmd, char **args);
+// verifies if a command is safe to be ran
+
+
 /* useful constants*/
 
 #define BG 0

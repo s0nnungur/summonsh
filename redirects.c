@@ -23,23 +23,23 @@ int dupandclose(int fd, int fdold, int numargs, char *args[]) {
 
 int redirects(int numargs, char *args[]) {
     // redirect "2>"
-    if ( numargs>=3 && strcmp(args[numargs-2], "2>") == 0) {
+    if ( numargs>=3 && strcmp(args[numargs-2], "ERR") == 0) {
         int fd = creat(args[numargs - 1], FILE_MODE);
         numargs = dupandclose(fd, STDERR_FILENO, numargs, args);
     }
 
         // redirect ">"
-    if (numargs>=3 && strcmp(args[numargs-2], ">")==0) {
+    if (numargs>=3 && strcmp(args[numargs-2], "SAIDA")==0) {
         int fd = creat(args[numargs-1], FILE_MODE);
         numargs = dupandclose(fd, STDOUT_FILENO, numargs, args);
 
         // redirect ">>"
-    } else if (numargs>=3 && strcmp(args[numargs-2], ">>")==0) {
+    } else if (numargs>=3 && strcmp(args[numargs-2], "SAIDAPLUS")==0) {
         int fd = open(args[numargs-1], O_CREAT|O_APPEND|O_WRONLY, FILE_MODE);
         numargs = dupandclose(fd, STDOUT_FILENO, numargs, args);
     }
     
-    if (numargs>=3 && strcmp(args[numargs-2], "<")==0) {
+    if (numargs>=3 && strcmp(args[numargs-2], "ENTRADA")==0) {
         int fd = open(args[numargs-1], O_RDONLY, FILE_MODE);
         numargs = dupandclose(fd, STDIN_FILENO, numargs, args);
     }

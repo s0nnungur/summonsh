@@ -15,6 +15,20 @@
 
 #include "shell.h"
 
+int safeexec(char *cmd, char **args) {
+  char *safe[] = {"ls","cat","date", NULL};
+  int i=0;
+
+  while(safe[i]!=NULL) {
+    if (strcmp(cmd, safe[i]) == 0)
+      execvp(cmd, args);       // autorizado, executa
+    i++;
+  }
+
+  printf("This command isn't allowed : %s\n", cmd);
+  exit(1);
+}
+
 void execute (int numargs, char **args) {
   int pid, status, fd[2];
   int code = ultimo(&numargs, args);
@@ -39,20 +53,25 @@ void execute (int numargs, char **args) {
         close(fd[0]); close(fd[1]);
 
         numargs = redirects(numargs, args);
-        execvp(*args, args);
+        //execvp(*args, args);                1
+        safeexec(*args, args);
+
       } else {
         args = args + index + 1;
         numargs= numargs - index - 1;
         dup2(fd[0], STDIN_FILENO);
         close(fd[0]); close(fd[1]);
         numargs = redirects(numargs, args);
-        execvp (*args, args);
+        //execvp (*args, args);               2
+        safeexec(*args, args);
+
       }
       
     } else { 
       //sem pipe -> atual
       numargs = redirects(numargs, args);
-      execvp (*args, args);
+      //execvp (*args, args);               3
+      safeexec(*args, args);
       perror (*args);           // number of args isn't known. args of execv() e execvp() are file name
       exit (1);                 // to be executed and a string vector that contains args
     }  
